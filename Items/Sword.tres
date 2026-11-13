@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://5iehk7lnesi3"]
+
+[ext_resource type="Script" uid="uid://c0cljrx76fclt" path="res://Items/ItemResourceScript.gd" id="1_jm3gf"]
+
+[resource]
+script = ExtResource("1_jm3gf")
+itemName = "Sword"
+maxStack = 1
+metadata/_custom_type_script = "uid://c0cljrx76fclt"

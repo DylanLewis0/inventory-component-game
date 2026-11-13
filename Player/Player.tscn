@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://61rkb4qphs51"]
+
+[ext_resource type="Script" uid="uid://cnbf3k52hyuwa" path="res://Player/PlayerMovement.gd" id="1_3qydi"]
+[ext_resource type="PackedScene" uid="uid://ckdd1mk8dqlel" path="res://InventoryComponent/InventoryComponent.tscn" id="2_q3lat"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y0r0m"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mjkgj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7q4e"]
+albedo_color = Color(0.34404647, 5.359359e-05, 0.32512137, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l2ndj"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mjkgj"]
+size = Vector3(5, 1, 5)
+
+[node name="Player" type="CharacterBody3D" unique_id=1414299537]
+script = ExtResource("1_3qydi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1742233876]
+shape = SubResource("CapsuleShape3D_y0r0m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1955483106]
+mesh = SubResource("CapsuleMesh_mjkgj")
+surface_material_override/0 = SubResource("StandardMaterial3D_o7q4e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1288185724]
+transform = Transform3D(-0.00672745, -0.99997735, 0, 0.99997735, -0.00672745, 0, 0, 0, 1, 0, 0.45011586, -0.39701623)
+mesh = SubResource("CapsuleMesh_l2ndj")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=915862722]
+transform = Transform3D(1, 0, 0, 0, 0.5978319, 0.8016215, 0, -0.8016215, 0.5978319, 0, 6.3640823, 3.1414866)
+current = true
+
+[node name="Inventory" parent="." unique_id=1992128105 instance=ExtResource("2_q3lat")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=925478653]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=367554319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1295166)
+shape = SubResource("BoxShape3D_mjkgj")
+
+[connection signal="area_entered" from="Area3D" to="Inventory" method="detectItem"]

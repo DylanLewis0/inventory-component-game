@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://cygrtnu7nrx8o"]
+
+[ext_resource type="Script" uid="uid://c0cljrx76fclt" path="res://Items/ItemResourceScript.gd" id="1_043p8"]
+
+[resource]
+script = ExtResource("1_043p8")
+itemName = "Apple"
+maxStack = 9
+metadata/_custom_type_script = "uid://c0cljrx76fclt"

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cd5kp6pg6oyv0"]
+
+[ext_resource type="PackedScene" uid="uid://61rkb4qphs51" path="res://Player/Player.tscn" id="1_o7q4e"]
+[ext_resource type="PackedScene" uid="uid://l2qvegkhq01q" path="res://ItemPickup/ItemPickup.tscn" id="2_wjbt7"]
+[ext_resource type="Resource" uid="uid://cygrtnu7nrx8o" path="res://Items/Apple.tres" id="3_2hiyw"]
+[ext_resource type="PackedScene" uid="uid://4msfahbosvv" path="res://Enemy/Enemy.tscn" id="4_af7ge"]
+
+[sub_resource type="Environment" id="Environment_q3lat"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_o7q4e"]
+
+[sub_resource type="Compositor" id="Compositor_tok1r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mjkgj"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mjkgj"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="Gradient" id="Gradient_ddoul"]
+colors = PackedColorArray(2.45166e-07, 0.18313137, 1.6845763e-07, 1, 0.050980393, 0.64705884, 0.050980393, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tok1r"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q3lat"]
+noise = SubResource("FastNoiseLite_tok1r")
+color_ramp = SubResource("Gradient_ddoul")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7q4e"]
+albedo_texture = SubResource("NoiseTexture2D_q3lat")
+roughness = 0.0
+
+[node name="Node3D" type="Node3D" unique_id=4955458]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=874453204]
+transform = Transform3D(1, 0, 0, 0, -0.7933534, 0.60876137, 0, -0.60876137, -0.7933534, -21.893932, 19.28059, -71.008156)
+light_energy = 0.78
+
+[node name="Player" parent="." unique_id=1414299537 instance=ExtResource("1_o7q4e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1855817, 5.1420035)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1587291483]
+environment = SubResource("Environment_q3lat")
+camera_attributes = SubResource("CameraAttributesPractical_o7q4e")
+compositor = SubResource("Compositor_tok1r")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1500735900]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=875781150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0429306, 0)
+shape = SubResource("BoxShape3D_mjkgj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=470852707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0429306, 0)
+mesh = SubResource("BoxMesh_mjkgj")
+surface_material_override/0 = SubResource("StandardMaterial3D_o7q4e")
+
+[node name="ItemPickUp" parent="." unique_id=1054581594 instance=ExtResource("2_wjbt7")]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -14.512651, 0, 0)
+item = ExtResource("3_2hiyw")
+
+[node name="Enemy" parent="." unique_id=1396011422 instance=ExtResource("4_af7ge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.1086884)

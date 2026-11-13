@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://4msfahbosvv"]
+
+[ext_resource type="Script" uid="uid://hxl64f2mlhm0" path="res://Enemy/Enemy.gd" id="1_epr5s"]
+[ext_resource type="PackedScene" uid="uid://ckdd1mk8dqlel" path="res://InventoryComponent/InventoryComponent.tscn" id="2_vonkd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y0r0m"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vso2s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fkela"]
+albedo_color = Color(0.68727726, 0, 0.22802186, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l2ndj"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d2k2y"]
+radius = 0.7
+height = 6.454
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1414299537 node_paths=PackedStringArray("inventory")]
+script = ExtResource("1_epr5s")
+inventory = NodePath("Inventory")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1742233876]
+shape = SubResource("CapsuleShape3D_y0r0m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1955483106]
+mesh = SubResource("CapsuleMesh_vso2s")
+surface_material_override/0 = SubResource("StandardMaterial3D_fkela")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1288185724]
+transform = Transform3D(-0.00672745, -0.99997735, 0, 0.99997735, -0.00672745, 0, 0, 0, 1, 0, 0.45011586, -0.39701623)
+mesh = SubResource("CapsuleMesh_l2ndj")
+
+[node name="Inventory" parent="." unique_id=1992128105 instance=ExtResource("2_vonkd")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1946408871]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1211287226]
+shape = SubResource("CapsuleShape3D_d2k2y")
+
+[connection signal="body_entered" from="Area3D" to="." method="die"]
